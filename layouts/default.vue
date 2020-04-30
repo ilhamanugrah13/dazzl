@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav
-      class="navbar header"
+      class="navbar header is-fixed-top"
       role="navigation"
       aria-label="main navigation"
     >
@@ -13,31 +13,62 @@
           dazzl
         </a>
 
-        <div class="navbar-burger">
+        <div
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarHome"
+          @click="showNav = !showNav"
+        >
           <span />
           <span />
           <span />
         </div>
       </div>
-      <div class="navbar-menu">
+      <div
+        id="navbarHome"
+        class="navbar-menu"
+        :class="{ 'is-active' : showNav }"
+      >
         <div class="navbar-end">
-          <b-navbar-item href="#">
-            Women
-          </b-navbar-item>
+          <b-navbar-dropdown label="Woman">
+            <b-navbar-item href="#">
+              Gown
+            </b-navbar-item>
+            <b-navbar-item href="#">
+              Dress
+            </b-navbar-item>
+          </b-navbar-dropdown>
           <b-navbar-item href="#">
             Men
           </b-navbar-item>
           <b-navbar-item href="#">
             Kids
           </b-navbar-item>
-          <b-navbar-item class="cart" href="#" />
+          <b-navbar-item
+            class="cart"
+            tag="nuxt-link"
+            to="/checkout"
+          >
+            <div class="cart-icon">
+              <div
+                v-if="cartList.length > 0"
+                class="cart-qty"
+              >
+                {{ cartList.length }}
+              </div>
+            </div>
+          </b-navbar-item>
           <b-navbar-item href="#">
             Login
           </b-navbar-item>
         </div>
       </div>
     </nav>
-    <nuxt />
+    <div class="main">
+      <nuxt />
+    </div>
     <div class="footer">
       <div class="columns">
         <div class="column is-6">
@@ -47,7 +78,7 @@
           </ul>
         </div>
         <div class="column is-6">
-          <div class="newsletter">
+          <div class="newsletter is-pulled-right">
             <b-field>
               <b-input
                 custom-class="newsletter-input"
@@ -67,30 +98,6 @@
         &copy; dazzl 2020
       </p>
     </div>
-    <!-- <section class="main-content columns">
-      <aside class="column is-2 section">
-        <p class="menu-label is-hidden-touch">
-          General
-        </p>
-        <ul class="menu-list">
-          <li
-            v-for="(item, key) of items"
-            :key="key"
-          >
-            <nuxt-link
-              :to="item.to"
-              exact-active-class="is-active"
-            >
-              <b-icon :icon="item.icon" /> {{ item.title }}
-            </nuxt-link>
-          </li>
-        </ul>
-      </aside>
-
-      <div class="container column is-10">
-        <nuxt />
-      </div>
-    </section> -->
   </div>
 </template>
 
@@ -98,6 +105,7 @@
 export default {
   data () {
     return {
+      showNav: false,
       items: [
         {
           title: 'Home',
@@ -110,6 +118,11 @@ export default {
           to: { name: 'inspire' }
         }
       ]
+    }
+  },
+  computed: {
+    cartList () {
+      return this.$store.state.cart
     }
   }
 }
@@ -135,16 +148,47 @@ export default {
 }
 
 .cart {
-  background-image: url('~@/assets/img/icons/supermarket.png');
-  background-repeat: no-repeat;
   padding: 8px 30px;
-  width: 20px;
-  background-size:20px;
   background-position: center;
 
   &:hover {
-    background-image: url('~@/assets/img/icons/supermarket-white.png');
+    .cart-icon {
+      background-image: url('~@/assets/img/icons/supermarket-white.png');
+    }
   }
+
+  .cart-icon {
+    width: 20px;
+    height: 20px;
+    background-size: 100%;
+    background-image: url('~@/assets/img/icons/supermarket.png');
+    background-repeat: no-repeat;
+    position: relative;
+
+    .cart-qty {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      width: 15px;
+      height: 15px;
+      text-align: center;
+      line-height: 15px;
+      background: red;
+      border-radius: 50%;
+      color: white;
+      font-size: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .cart {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+.main {
+  padding-top: 65px;
 }
 
 .footer {
@@ -154,6 +198,8 @@ export default {
 
 .footer-nav {
   li {
+    margin-bottom: 10px;
+
     a {
       color: white;
 

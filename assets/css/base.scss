@@ -9,6 +9,32 @@
     color: black;
 }
 
+.navbar-link:focus,
+.navbar-item.has-dropdown.is-active .navbar-link,
+.navbar-item.has-dropdown.is-active .navbar-link {
+    background: black;
+    color: white;
+}
+
+.navbar-item.has-dropdown.is-active .navbar-link:not(.is-arrowless)::after{
+    border-color: white;
+}
+
+.navbar-link:not(.is-arrowless)::after{
+  border-color: black;
+}
+
+@media screen and (min-width: 1024px) {
+  .navbar-item.has-dropdown:hover {
+    .navbar-link {
+      background-color: black;
+      color: white;
+    }
+    .navbar-link:not(.is-arrowless)::after{
+        border-color: white;
+    }
+  }
+}
 
 .carousel-arrow {
     .icon {
@@ -18,5 +44,16 @@
         &:hover {
             border: 1px solid black;
         }
+    }
+}
+
+.b-numberinput {
+    .button {
+        background: black;
+        border-radius: 0;
+    }
+
+    .input {
+        border-radius: 0;
     }
 }

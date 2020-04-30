@@ -11,27 +11,20 @@
             :alt="`banner${i}`"
             class="slider-image"
           >
-          <!-- <section :class="`hero is-medium is-${carousel.color}`">
-            <div class="hero-body has-text-centered">
-              <h1 class="title">
-                {{ carousel.text }}
-              </h1>
-            </div>
-          </section> -->
         </b-carousel-item>
         <div slot="indicators" class="slider-indicator" />
       </b-carousel>
     </div>
     <div class="section-brand">
-      <h2 class="heading-section">
+      <h2 class="heading-section has-text-centered">
         shop by brand
       </h2>
       <div class="slider-brand">
         <b-carousel-list
           :data="sliderBrand.items"
-          has-drag="drag"
-          repeat="true"
-          items-to-list="4"
+          :has-drag="true"
+          :repeat="true"
+          :items-to-show="4"
         >
           <img
             slot="item"
@@ -44,15 +37,15 @@
       </div>
     </div>
     <div class="section-shop">
-      <h2 class="heading-section">
+      <h2 class="heading-section has-text-centered">
         latest arrival
       </h2>
       <div class="slider-latest">
         <b-carousel-list
           :data="sliderLatest.items"
-          has-drag="drag"
-          repeat="true"
-          items-to-show="4"
+          :has-drag="true"
+          :repeat="true"
+          :items-to-show="4"
         >
           <ui-card
             slot="item"
@@ -64,10 +57,29 @@
         </b-carousel-list>
       </div>
     </div>
+    <div class="section-favorite">
+      <h2 class="heading-section has-text-centered">
+        most favorite items
+      </h2>
+      <div class="slider-favorite">
+        <b-carousel-list
+          :data="sliderFavorite.items"
+          :has-drag="true"
+          :repeat="true"
+          :items-to-show="4"
+        >
+          <ui-card
+            slot="item"
+            slot-scope="props"
+            :title="props.list.name"
+            :image="props.list.image"
+            :price="props.list.price"
+            is-favorite
+          />
+        </b-carousel-list>
+      </div>
+    </div>
   </section>
-  <!-- <section>
-    <div class="columns is-mobile" />
-  </section> -->
 </template>
 
 <script>
@@ -114,27 +126,56 @@ export default {
           {
             name: 'Women Luxury Dress',
             image: 'latest1.jpg',
-            price: 'IDR580.000'
+            price: '580000'
           },
           {
             name: 'Man Khaki shirt',
             image: 'latest2.jpg',
-            price: 'IDR720.000'
+            price: '720000'
           },
           {
             name: 'Black dazzl dress',
             image: 'latest3.jpg',
-            price: 'IDR999.000'
+            price: '999000'
           },
           {
             name: 'Slim-fit gray',
             image: 'latest4.jpg',
-            price: 'IDR220.000'
+            price: '220000'
           },
           {
             name: 'White Cycle Sweatshirt Kid',
             image: 'latest5.jpg',
-            price: 'IDR250.000'
+            price: '250000'
+          }
+        ]
+      },
+      sliderFavorite: {
+        items: [
+          {
+            name: 'Black dazzl dress',
+            image: 'latest1.jpg',
+            price: '999000'
+          },
+          {
+            name: 'Slim-fit gray',
+            image: 'latest2.jpg',
+            price: '220000'
+          },
+          {
+            name: 'White Cycle Sweatshirt Kid',
+            image: 'latest3.jpg',
+            price: '250000'
+          },
+          {
+            name: 'Women Luxury Dress',
+            image: 'latest4.jpg',
+            price: '580000'
+          },
+          {
+            name: 'Man Khaki shirt',
+            image: 'latest5.jpg',
+            price: '720000'
           }
         ]
       }

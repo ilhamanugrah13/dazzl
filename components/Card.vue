@@ -1,52 +1,34 @@
 <template>
   <div class="column">
     <img
-      :src="require(`@/assets/img/dummy/${image}`)"
+      :src="require(`@/assets/img/${(!isFavorite) ? 'dummy' : 'favorite'}/${image}`)"
       :alt="title"
     >
     <div class="card-content">
       <div class="content has-text-centered">
         <p>{{ title }}</p>
-        <p>{{ price }}</p>
+        <p>{{ priceFormat(price) }}</p>
+        <b-button
+          v-if="isFavorite"
+          class="btn-cart"
+          @click="addToCart"
+        >
+          add to cart
+        </b-button>
       </div>
     </div>
-    <!-- <div class="card">
-      <header class="card-header">
-        <p class="card-header-title has-text-grey">
-          {{ title }}
-        </p>
-      </header>
-      <div class="card-content">
-        <div class="content has-text-centered">
-          <b-icon
-            :icon="icon"
-            size="is-large"
-            type="is-primary"
-          />
-        </div>
-      </div>
-      <footer class="card-footer">
-        <div class="card-footer-item">
-          <span>
-            <slot />
-          </span>
-        </div>
-      </footer>
-    </div> -->
   </div>
 </template>
 
 <script>
+import { defaultMoneyFormat } from '@/utils/moneyFormat'
+
 export default {
   props: {
     title: {
       type: String,
       required: true
     },
-    // icon: {
-    //   type: String,
-    //   required: true
-    // },
     image: {
       type: String,
       required: true
@@ -54,6 +36,22 @@ export default {
     price: {
       type: String,
       required: true
+    },
+    isFavorite: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    priceFormat (price) {
+      return defaultMoneyFormat(price)
+    },
+    addToCart () {
+      this.$store.dispatch('addToCart', {
+        name: this.title,
+        price: this.price,
+        image: this.image
+      })
     }
   }
 }
