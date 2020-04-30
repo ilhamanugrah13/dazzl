@@ -1,0 +1,19 @@
+{
+    "editor.rulers": [100],
+    "editor.formatOnSave": false,
+    "eslint.enable": true,
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+      {
+        "language": "javascript",
+        "autoFix": true,
+      },
+      {
+        "language": "vue",
+        "autoFix": true,
+      },
+    ],
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+  }

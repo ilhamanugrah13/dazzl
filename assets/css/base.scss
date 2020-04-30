@@ -1,0 +1,22 @@
+@font-face {
+    font-family: "Monserrat";
+    src: url('~@/assets/fonts/Montserrat-ExtraBold.ttf');
+    font-weight: 700;
+}
+
+.heading-section {
+    font-family: "Monserrat", sans-serif;
+    color: black;
+}
+
+
+.carousel-arrow {
+    .icon {
+        color: black;
+        border-radius: 0;
+        
+        &:hover {
+            border: 1px solid black;
+        }
+    }
+}
